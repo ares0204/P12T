@@ -19,6 +19,10 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Products", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
+                <ul class="navbar-nav float-end">
+                    <li>@Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
             </div>
         </div>
     </nav>

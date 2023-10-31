@@ -18,5 +18,10 @@ namespace P12T.Controllers
         {
             return View();
         }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
     }
 }
