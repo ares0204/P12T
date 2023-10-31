@@ -14,19 +14,12 @@ namespace P12T.Models
     
     public partial class Order
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
-        {
-            this.OrderItems = new HashSet<OrderItem>();
-        }
+        public int OrderId { get; set; }
+        public int AccountId { get; set; }
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
     
-        public int order_id { get; set; }
-        public Nullable<int> customer_id { get; set; }
-        public Nullable<System.DateTime> order_date { get; set; }
-        public Nullable<decimal> total_amount { get; set; }
-    
-        public virtual Customer Customer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

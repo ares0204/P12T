@@ -17,16 +17,15 @@ namespace P12T.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.OrderItems = new HashSet<OrderItem>();
+            this.Orders = new HashSet<Order>();
         }
     
-        public int product_id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public Nullable<decimal> price { get; set; }
-        public Nullable<int> quantity { get; set; }
+        public int ProductId { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public string imgURL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

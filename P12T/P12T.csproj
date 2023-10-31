@@ -135,7 +135,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Customer.cs">
+    <Compile Include="Models\Account.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelDB.Context.cs">
@@ -156,9 +156,6 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrderItem.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -167,6 +164,7 @@
   <ItemGroup>
     <Content Include="Assets\css\sb-admin-2.css" />
     <Content Include="Assets\css\sb-admin-2.min.css" />
+    <Content Include="Assets\img\imgError.jpg" />
     <Content Include="Assets\img\undraw_posting_photo.svg" />
     <Content Include="Assets\img\undraw_profile.svg" />
     <Content Include="Assets\img\undraw_profile_1.svg" />
@@ -2088,9 +2086,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\LoginLayout.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
