@@ -28,8 +28,15 @@ namespace P12T.Controllers
                     // Xác thực thành công, thiết lập cookie hoặc session ở đây
                     // Ví dụ sử dụng Forms Authentication
                     // FormsAuthentication.SetAuthCookie(user.Email, false);
-
-                    return RedirectToAction("Index", "Home"); // Chuyển hướng đến trang chủ
+                    var check = db.Accounts.FirstOrDefault(a => a.Type == "Admin");
+                    if (check != null)
+                    {
+                        return RedirectToAction("Index", "HomeAdmin", new { area = "Admin"});
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home"); // Chuyển hướng đến trang chủ
+                    }
                 }
                 else
                 {
