@@ -10,9 +10,33 @@ namespace P12T.Controllers
     {
         private P12TEntities db = new P12TEntities();
 
+        // LOGIN
         public ActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Account model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.Accounts.FirstOrDefault(a => a.Email == model.Email && a.Password == model.Password);
+                if (user != null)
+                {
+                    // Xác thực thành công, thiết lập cookie hoặc session ở đây
+                    // Ví dụ sử dụng Forms Authentication
+                    // FormsAuthentication.SetAuthCookie(user.Email, false);
+
+                    return RedirectToAction("Index", "Home"); // Chuyển hướng đến trang chủ
+                }
+                else
+                {
+                    ModelState.AddModelError("Password", "Email hoặc mật khẩu không hợp lệ.");
+                }
+            }
+            return View(model);
         }
 
         //REGISTER
