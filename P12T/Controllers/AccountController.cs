@@ -2,7 +2,9 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.Razor.Generator;
 
 namespace P12T.Controllers
 {
@@ -25,18 +27,25 @@ namespace P12T.Controllers
                 var user = db.Accounts.FirstOrDefault(a => a.Email == model.Email && a.Password == model.Password);
                 if (user != null)
                 {
-                    // Xác thực thành công, thiết lập cookie hoặc session ở đây
-                    // Ví dụ sử dụng Forms Authentication
-                    // FormsAuthentication.SetAuthCookie(user.Email, false);
-                    var check = db.Accounts.FirstOrDefault(a => a.Type == "Admin");
-                    if (check != null)
+                    if (db.Accounts.FirstOrDefault(a => a.Email == model.Email && a.Password == model.Password && a.Type == "Admin") != null)
                     {
-                        return RedirectToAction("Index", "HomeAdmin", new { area = "Admin"});
-                    }
-                    else
+                        var fullName = user.FullName;
+                        var type = user.Type;
+
+                        Session["FullName"] = fullName;
+                        Session["Type"] = type;
+
+                        return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
+                    } else
                     {
-                        return RedirectToAction("Index", "Home"); // Chuyển hướng đến trang chủ
-                    }
+                        var fullName = user.FullName;
+                        var type = user.Type;
+
+                        Session["FullName"] = fullName;
+                        Session["Type"] = type;
+
+                        return RedirectToAction("Index", "Home");
+                    }  
                 }
                 else
                 {
@@ -45,6 +54,7 @@ namespace P12T.Controllers
             }
             return View(model);
         }
+
 
         //REGISTER
         public ActionResult Register()
