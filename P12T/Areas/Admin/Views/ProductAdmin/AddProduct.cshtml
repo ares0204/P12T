@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddProduct</title>
+</head>
+<body>
+    <div>
+        @model P12T.Models.Product
+
+        @using (Html.BeginForm("AddProduct", "ProductAdmin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price)
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.imgURL)
+                @Html.TextBoxFor(model => model.imgURL, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.imgURL)
+            </div>
+
+
+            <button type="submit" class="btn btn-primary mt-2">Add Product</button>
+        }
+    </div>
+</body>
+</html>

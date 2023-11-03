@@ -2063,6 +2063,9 @@
     <Content Include="Models\ModelDB.edmx.diagram">
       <DependentUpon>ModelDB.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\ProductAdmin\AddProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductAdmin\EditProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductAdmin\DeleteProduct.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2086,14 +2089,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\ProductAdmin\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>

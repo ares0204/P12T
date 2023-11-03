@@ -1,4 +1,5 @@
-﻿using System;
+﻿using P12T.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,12 @@ namespace P12T.Areas.Admin.Controllers
 {
     public class HomeAdminController : Controller
     {
+        private P12TEntities db = new P12TEntities();
+
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<Product> objProductList = db.Products;
+            return View(objProductList);
         }
     }
 }
