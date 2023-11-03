@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="P12TModel.Product" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="P12TModel.FK__Orders__AccountI__3D5E1FD2" ManuallyRouted="false" />
         <AssociationConnector Association="P12TModel.FK__Orders__ProductI__3E52440B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="P12TModel.News" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,122 +1,43 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
+@model P12T.Models.CompositeModel
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 </head>
 <body>
-
     <section id="featured-products">
         <h2>Sản phẩm nổi bật</h2>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 1">
-            <h3>Áo sơ mi nam</h3>
-            <p>425,000₫</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 2">
-            <h3>Áo sơ mi nam</h3>
-            <p>225,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 3">
-            <h3>Áo sơ mi nam</h3>
-            <p>200,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 4">
-            <h3>Áo sơ mi nam</h3>
-            <p>291,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 5">
-            <h3>Áo sơ mi nam</h3>
-            <p>320,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
+        @foreach (var product in Model.Products)
+        {
+            <div class="product">
+                <img src="@product.imgURL" width="200" height="300" alt="Product Image">
+                <h3>@product.Name</h3>
+                <p>@product.Price₫</p>
+                <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
+            </div>
+        }
     </section>
-    <section id="featured-products">
+
+    <section id="deals">
         <h2>🔥Deal sốc xả kho - Ưu đãi đến 70%🔥</h2>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 2.1">
-            <h3>Áo sơ mi nam</h3>
-            <p>420,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 2.2">
-            <h3>Áo sơ mi nam</h3>
-            <p>220,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 2.3">
-            <h3>Áo sơ mi nam</h3>
-            <p>100,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 2.4">
-            <h3>Áo sơ mi nam</h3>
-            <p>160,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 2.5">
-            <h3>Áo sơ mi nam</h3>
-            <p>550,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 2.6">
-            <h3>Áo sơ mi nam</h3>
-            <p>345,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 2.7">
-            <h3>Áo sơ mi nam</h3>
-            <p>720,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
-        <div class="product">
-            <img src="https://aristino.com/Data/ResizeImage/images/product/so-mi-ngan-tay/ass240s3/_TC_6010x500x500x4.webp" width="200" height="300" alt="Sản phẩm 2.8">
-            <h3>Áo sơ mi nam</h3>
-            <p>360,000đ</p>
-            <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
-        </div>
+        <!-- Loop through deals here -->
+    </section>
 
-        <section id="featured-products">
-            <h2>Tin tức cập nhật</h2>
-            <div class="product">
-                <img src="https://hstatic.net/744/1000088744/10/2016/5-7/blog_1.jpg" width="200" height="300" alt="Sản phẩm 2.1">
-                <h3>10 Hãng giày được giới trẻ yêu thích</h3>
-                <p>Đây là note em viết về phần phân biệt giày VNXK xịn, với giày VNXK loại 2... </p>
-
+    <section id="news">
+        <h2>Tin tức cập nhật</h2>
+        @foreach (var news in Model.News)
+        {
+            <div class="news-item">
+                <img src="@news.imgURL" width="200" height="300" alt="News Image">
+                <h3>@news.Title</h3>
+                <p>@news.Content</p>
+                <a href="#" class="button read-more-button">Đọc thêm</a>
             </div>
-            <div class="product">
-                <img src="https://hstatic.net/744/1000088744/10/2016/5-7/blog_1.jpg" width="200" height="300" alt="Sản phẩm 2.2">
-                <h3>10 Hãng giày được giới trẻ yêu thích</h3>
-                <p>Đây là note em viết về phần phân biệt giày VNXK xịn, với giày VNXK loại 2... </p>
-
-            </div>
-            <div class="product">
-                <img src="https://hstatic.net/744/1000088744/10/2016/5-7/blog_1.jpg" width="200" height="300" alt="Sản phẩm 2.3">
-                <h3>10 Hãng giày được giới trẻ yêu thích</h3>
-                <p>Đây là note em viết về phần phân biệt giày VNXK xịn, với giày VNXK loại 2... </p>
-
-            </div>
-            <div class="product">
-                <img src="https://hstatic.net/744/1000088744/10/2016/5-7/blog_1.jpg" width="200" height="300" alt="Sản phẩm 2.4">
-                <h3>10 Hãng giày được giới trẻ yêu thích</h3>
-                <p>Đây là note em viết về phần phân biệt giày VNXK xịn, với giày VNXK loại 2...</p>
-
-            </div>
-        </section>
+        }
+    </section>
 </body>
 </html>

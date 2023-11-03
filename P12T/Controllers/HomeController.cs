@@ -15,7 +15,17 @@ namespace P12T.Controllers
         public ActionResult Index()
         {
             IEnumerable<Product> objProductList = db.Products;
-            return View(objProductList);
+            IEnumerable<News> objNewsList = db.News;
+
+            // Create a composite model or a view model that includes both products and news
+            var compositeModel = new CompositeModel
+            {
+                Products = objProductList,
+                News = objNewsList
+            };
+
+            return View(compositeModel);
         }
+
     }
 }
