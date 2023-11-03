@@ -1,0 +1,74 @@
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#featured-products {
+    padding: 40px;
+    text-align: center;
+}
+
+.product {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    width: 200px;
+    margin: 20px;
+}
+
+    .product:hover {
+        transform: translateY(-10px);
+    }
+
+    .product img {
+        object-fit: cover;
+    }
+
+    .product h3 {
+        margin: 10px 0;
+    }
+
+    .product p {
+        margin: 0;
+    }
+
+footer {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 10px;
+}
+
+.footer-social a {
+    color: #333;
+    margin: 0 5px;
+}
+
+.footer-info p {
+    margin-bottom: 5px;
+}
