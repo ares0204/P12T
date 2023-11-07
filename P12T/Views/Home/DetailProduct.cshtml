@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "DetailProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model P12T.Models.Product
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Xem chi tiết sản phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .product-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .product-image {
+            flex: 1;
+        }
+
+            .product-image img {
+                max-width: 100%;
+                height: auto;
+            }
+
+        .product-info {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+            .product-info h2 {
+                font-size: 24px;
+            }
+
+            .product-info p {
+                margin-bottom: 10px;
+            }
+
+        .quantity {
+            margin-bottom: 10px;
+        }
+
+            .quantity label {
+                display: block;
+            }
+
+            .quantity input {
+                width: 50px;
+            }
+
+        .add-to-cart {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+            .add-to-cart:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="product-details">
+        <div class="col-6">
+            <img class="img-thumbnail w-50 d-block m-auto" src="~/Assets/img/@Model.imgURL" alt="Product Image">
+        </div>
+        <div class="col-6">
+            <h2 class="mb-lg-5">Thông tin sản phẩm</h2>
+            <span class="d-block">Tên sản phẩm: @Model.Name</span>
+            <span class="d-block">Mô tả sản phẩm...</span>
+            <span class="d-block">
+                Giá:
+                @string.Format("{0:C}", Model.Price)
+            </span>
+            <div class="quantity">
+                <label for="quantity-input">Số lượng:</label>
+            </div>
+            @using (Html.BeginForm("AddOrder", "Home", FormMethod.Post))
+            {
+                <input type="number" id="quantity-input" class="d-block" name="quantity" value="1">
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => Model.ProductId)
+
+                <button type="submit" class="btn btn-primary mt-2">Thêm vào giỏ hàng</button>
+            }
+        </div>
+    </div>
+</body>
+
+</html>
+
+

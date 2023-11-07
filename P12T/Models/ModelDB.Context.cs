@@ -26,8 +26,9 @@ namespace P12T.Models
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
     }
 }

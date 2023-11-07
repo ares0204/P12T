@@ -1,34 +1,33 @@
 ﻿
 @{
     ViewBag.Title = "DeleteProduct";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
 }
 
 @model P12T.Models.Product
 
-<form method="post" asp-action="Delete">
-    <input asp-for="id" hidden />
-    <div class="border p-3 mt-4">   
-        <div class="row pb-2">
-            <h2 class="text-primary">
-                Delete Product
-            </h2>
-            <hr />
-        </div>
-        <div class="mb-3">
-            <label asp-for="Title"></label>
-            <input asp-for="Title" disabled class="form-control" placeholder="@Model.Name"/>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:150px">
-            Delete
-        </button>
-        @Html.ActionLink("Back to List", "Index", "HomeAdmin", null, new { @class = "btn btn-secondary", style = "width:150px" })
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Delete Product</h1>
     </div>
-</form>
 
-@section Scripts {
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
-}
+    <div class="p-5">
+        @using (Html.BeginForm("DeleteProduct", "ProductAdmin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
 
+            <div class="form-group">
+                <span>Bạn có chắc là muốn xoá sản phẩm này không?</span>
+                <label asp-for="Title"></label>
+                <input asp-for="Title" disabled class="form-control" placeholder="@Model.Name" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2 w-100 mb-3">Delete</button>
+
+            @Html.ActionLink("Back to List", "Index", "HomeAdmin", null, new { @class = "btn btn-secondary w-100" })
+        }
+    </div>
+</div>

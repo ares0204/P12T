@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-@model P12T.Models.CompositeModel
+@model IEnumerable<P12T.Models.Product>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,33 +11,61 @@
 <body>
     <section id="featured-products">
         <h2>Sản phẩm nổi bật</h2>
-        @foreach (var product in Model.Products)
+        @foreach (var obj in Model)
+        {
+            <div class="product ">
+                <img src="~/Assets/img/@obj.imgURL" width="200" height="300" alt="Product Image">
+                <h3>@obj.Name</h3>
+                <p>
+                    @string.Format("{0:C}", @obj.Price)
+                </p>
+
+                @using (Html.BeginForm("AddOrder", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(model => obj.ProductId)
+
+                    @Html.Hidden("quantity", 1)
+
+                    @Html.ActionLink("Chi tiết sản phẩm", "DetailProduct", "Home", new { id = obj.ProductId }, new { @class = "btn btn-info" })
+
+                    <button type="submit" class="btn btn-primary mt-2">Thêm vào giỏ hàng</button>
+                }
+            </div>
+        }
+    </section>
+
+    <section id="featured-products">
+        <h2>🔥Deal sốc xả kho - Ưu đãi đến 70%🔥</h2>
+        @foreach (var obj in Model)
         {
             <div class="product">
-                <img src="@product.imgURL" width="200" height="300" alt="Product Image">
-                <h3>@product.Name</h3>
-                <p>@product.Price₫</p>
-                <a href="#" class="button add-to-cart-button">Thêm vào giỏ hàng</a>
+                <img src="~/Assets/img/@obj.imgURL" width="200" height="300" alt="Product Image">
+                <h3>@obj.Name</h3>
+                <p>
+                    @string.Format("{0:C}", @obj.Price)
+                </p>
+
+                @using (Html.BeginForm("AddOrder", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(model => obj.ProductId)
+
+                    @Html.Hidden("quantity", 1)
+
+                    @Html.ActionLink("Chi tiết sản phẩm", "DetailProduct", "Home", new { id = obj.ProductId }, new { @class = "btn btn-info" })
+
+                    <button type="submit" class="btn btn-primary mt-2">Thêm vào giỏ hàng</button>
+                }
+
             </div>
         }
     </section>
 
-    <section id="deals">
-        <h2>🔥Deal sốc xả kho - Ưu đãi đến 70%🔥</h2>
-        <!-- Loop through deals here -->
-    </section>
-
-    <section id="news">
+    <section id="featured-products">
         <h2>Tin tức cập nhật</h2>
-        @foreach (var news in Model.News)
-        {
-            <div class="news-item">
-                <img src="@news.imgURL" width="200" height="300" alt="News Image">
-                <h3>@news.Title</h3>
-                <p>@news.Content</p>
-                <a href="#" class="button read-more-button">Đọc thêm</a>
-            </div>
-        }
     </section>
 </body>
 </html>

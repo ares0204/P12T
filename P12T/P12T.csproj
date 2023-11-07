@@ -139,6 +139,9 @@
     <Compile Include="Models\Account.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModelDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -169,7 +172,11 @@
     <Content Include="Assets\css\site.css" />
     <Content Include="Assets\css\sb-admin-2.css" />
     <Content Include="Assets\css\sb-admin-2.min.css" />
-    <Content Include="Assets\img\imgError.jpg" />
+    <Content Include="Assets\img\imageError.png" />
+    <Content Include="Assets\img\p1.png" />
+    <Content Include="Assets\img\p2.jpg" />
+    <Content Include="Assets\img\p3.jpg" />
+    <Content Include="Assets\img\p4.jpg" />
     <Content Include="Assets\img\undraw_posting_photo.svg" />
     <Content Include="Assets\img\undraw_profile.svg" />
     <Content Include="Assets\img\undraw_profile_1.svg" />
@@ -2067,9 +2074,10 @@
     <Content Include="Models\ModelDB.edmx.diagram">
       <DependentUpon>ModelDB.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Shared\_LayoutPage.cshtml" />
     <Content Include="Areas\Admin\Views\ProductAdmin\AddProduct.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductAdmin\EditProduct.cshtml" />
     <Content Include="Areas\Admin\Views\ProductAdmin\DeleteProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductAdmin\EditProduct.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2095,11 +2103,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Home\DetailProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>

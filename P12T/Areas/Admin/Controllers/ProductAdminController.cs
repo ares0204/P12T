@@ -1,8 +1,10 @@
 ﻿using P12T.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -63,36 +65,40 @@ namespace P12T.Areas.Admin.Controllers
             return View(obj);
         }
 
-        //GET
+        // GET: ProductAdmin/DeleteProduct/5
         public ActionResult DeleteProduct(int? id)
         {
-            if (id == null || id == 0)
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Product product = db.Products.Find(id);
+
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            var productsFromDb = db.Products.Find(id);
 
-            if (productsFromDb == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(productsFromDb);
+            return View(product);
         }
 
-        //POST
-        [HttpPost, ActionName("Delete")]
+        // POST: ProductAdmin/DeleteProduct/5
+        [HttpPost, ActionName("DeleteProduct")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeletePOST(int id)
+        public ActionResult DeleteProductConfirmed(int id)
         {
-            var obj = db.Products.Find(id);
-            if (obj == null)
+            Product product = db.Products.Find(id);
+
+            if (product == null)
             {
                 return HttpNotFound();
             }
 
-            db.Products.Remove(obj);
-            db.SaveChanges();
+            db.Products.Remove(product);
+            db.SaveChanges(); // Save changes to delete the product from the database.
+
+            // Redirect to a different view or action after successful deletion.
             return RedirectToAction("Index", "HomeAdmin", new { @area = "Admin" });
         }
     }
