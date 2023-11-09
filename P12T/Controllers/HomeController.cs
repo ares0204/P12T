@@ -21,6 +21,13 @@ namespace P12T.Controllers
             return View(objProductList);
         }
 
+        public ActionResult News()
+        {
+            IEnumerable<Article> objArticleList = db.Articles;
+
+            return View(objArticleList);
+        }
+
         public ActionResult DetailProduct(int id)
         {
             Product obj = db.Products.FirstOrDefault(p => p.ProductId == id);

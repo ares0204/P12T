@@ -18,5 +18,6 @@ namespace P12T.Models
         public double Price { get; set; }
         public string imgURL { get; set; }
         public int Quantity { get; set; }
+        public int ProductId { get; set; }
     }
 }

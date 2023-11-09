@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<P12T.Models.Article>
+
+<style>
+    p {
+        text-align: justify;
+    }
+</style>
+
+<section id="featured-products">
+    <h2>Tin tức cập nhật</h2>
+</section>
+
+@foreach (var obj in Model)
+{
+    <div class="">
+        <h4>@obj.Title</h4>
+        <span>@obj.CreateAt</span>
+        @Html.Raw(obj.Content)
+    </div>
+}
+

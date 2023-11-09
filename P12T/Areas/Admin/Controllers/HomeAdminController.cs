@@ -16,5 +16,10 @@ namespace P12T.Areas.Admin.Controllers
             IEnumerable<Product> objProductList = db.Products;
             return View(objProductList);
         }
+        public ActionResult Report()
+        {
+            IEnumerable<Report> objReportList = db.Reports;
+            return View(objReportList);
+        }
     }
 }

@@ -12,14 +12,10 @@ namespace P12T.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Report
     {
-        public int OrderId { get; set; }
-        public int ProductId { get; set; }
-        public int Quantity { get; set; }
-        public Nullable<int> AccountId { get; set; }
-    
-        public virtual Product Product { get; set; }
-        public virtual Account Account { get; set; }
+        public int ReportId { get; set; }
+        public double Money { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
     }
 }

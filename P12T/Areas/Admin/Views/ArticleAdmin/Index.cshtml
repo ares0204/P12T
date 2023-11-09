@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Article</h1>
+    </div>
+
+    @model IEnumerable<P12T.Models.Article>
+
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Article List</h2>
+            </div>
+            <div class="col-6 ">
+                @Html.ActionLink("Create new Article", "AddArticle", "ArticleAdmin", null, new { @class = "btn btn-primary", @style = "float: inline-end" })
+            </div>
+        </div>
+
+        <br />
+
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        ArticleID
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Content
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="10%">
+                            @obj.ArticleId
+                        </td>
+                        <td width="40%">
+                            @((obj.Title.Length > 50) ? obj.Title.Substring(0, 50) + "..." : obj.Title)
+                        </td>
+                        <td width="50%" style="overflow: hidden">
+                            @((obj.Content.Length > 50) ? obj.Content.Substring(0, 50) + "..." : obj.Content)
+                        </td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                @Html.ActionLink("Edit", "EditArticle", "ArticleAdmin", new { id = obj.ArticleId }, new { @class = "btn btn-primary mx-2" })
+                                @Html.ActionLink("Delete", "DeleteArticle", "ArticleAdmin", new { id = obj.ArticleId }, new { @class = "btn btn-danger mx-2" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

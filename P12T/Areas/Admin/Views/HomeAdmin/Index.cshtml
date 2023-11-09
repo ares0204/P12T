@@ -8,9 +8,6 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Product</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-        </a>
     </div>
 
     @model IEnumerable<P12T.Models.Product>
@@ -18,7 +15,7 @@
     <div class="container p-3">
         <div class="row pt-4">
             <div class="col-6">
-                <h2 class="text-primary">Article List</h2>
+                <h2 class="text-primary">Product List</h2>
             </div>
             <div class="col-6 ">
                 @Html.ActionLink("Create new Product", "AddProduct", "ProductAdmin", null, new { @class = "btn btn-primary", @style = "float: inline-end" })
@@ -56,7 +53,7 @@
                             @obj.Name
                         </td>
                         <td width="25%">
-                            @obj.Price
+                            @string.Format("{0:C}", @obj.Price)
                         </td>
                         <td width="25%">
                             @obj.imgURL

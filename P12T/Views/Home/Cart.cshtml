@@ -6,49 +6,105 @@
 
 @model IEnumerable<P12T.Models.Cart>
 
-<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-primary">Cart</h2>
+@if (Model.Any())
+{
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Cart</h2>
+            </div>
+        </div>
+
+        <br />
+
+        <table class="table" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    double moneyTotal = 0;
+                }
+
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="20%" class="">
+                            <img src="~/Assets/img/@obj.imgURL" width="200" height="300" alt="Product Image">
+                        </td>
+                        <td width="30%">
+                            @obj.Name
+                            @Html.ActionLink("Remove", "RemoveFromCart", "Cart", new { id = @obj.ProductId }, new { @class = "btn btn-danger btn-sm m-1", onclick = "return confirm('Bạn có chắc muốn xóa sản phẩm này?');" })
+                        </td>
+                        <td width="20%">
+                            @string.Format("{0:C}", @obj.Price)
+                        </td>
+
+                        @using (Html.BeginForm("UpdateCartTest", "Cart", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("productId", obj.ProductId)
+                            <td width="20%">
+                                <input class="w-50" name="quantity" value="@obj.Quantity" />
+                                <button type="submit" class="btn btn-info btn-sm m-1">Update</button>
+                            </td>
+                        }
+                        <td width="20%">
+                            @string.Format("{0:C}", @obj.Price * obj.Quantity)
+                            @{
+                                moneyTotal += @obj.Price * @obj.Quantity;
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @using (Html.BeginForm("AddReport", "Cart", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.Hidden("money", moneyTotal)
+            <div class="row mt-5">
+                <span class="col-4 justify-content-center">
+                    TỔNG CỘNG
+                </span>
+
+                <span class="col-4 justify-content-center">
+                    @string.Format("{0:C}", @moneyTotal)
+                </span>
+
+                <button type="submit" class="col-4 btn btn-primary">Thanh toán</button>
+
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Cart</h2>
+            </div>
         </div>
     </div>
+    <p class="text-center">Your cart is empty.</p>
+}
 
-    <br />
 
-    <table class="table table-bordered table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th></th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    Quantity
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
-                <tr>
-                    <td width="40%">
-                        <img src="~/Assets/img/@obj.imgURL" width="200" height="300" alt="Product Image">
-                    </td>
-                    <td width="30%">
-                        @obj.Name
-                    </td>
-                    <td width="30%">
-                        @obj.Price
-                    </td>
-                    <td width="30%">
-                        @obj.Quantity
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
 

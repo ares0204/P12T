@@ -11,12 +11,14 @@ namespace P12T.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class News
+    using System.Web.Mvc;
+
+    public partial class Article
     {
-        public int NewsId { get; set; }
+        public int ArticleId { get; set; }
         public string Title { get; set; }
+        [AllowHtml]
         public string Content { get; set; }
-        public string imgURL { get; set; }
+        public Nullable<System.DateTime> CreateAt { get; set; }
     }
 }

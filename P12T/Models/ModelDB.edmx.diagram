@@ -6,11 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="05fd8c1ea21a4f569f04ae89fc22d11d" Name="Diagram1">
         <EntityTypeShape EntityType="P12TModel.Account" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="P12TModel.News" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="P12TModel.Order" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="P12TModel.Product" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="P12TModel.FK__Orders__ProductI__3E52440B" />
         <EntityTypeShape EntityType="P12TModel.Cart" Width="1.5" PointX="5.375" PointY="1.125" />
+        <AssociationConnector Association="P12TModel.FK_Orders_Account" />
+        <EntityTypeShape EntityType="P12TModel.Report" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="P12TModel.Article" Width="1.5" PointX="4.5" PointY="3.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -15,14 +15,14 @@
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="char" MaxLength="10" />
         </EntityType>
-        <EntityType Name="News">
+        <EntityType Name="Articles">
           <Key>
-            <PropertyRef Name="NewsId" />
+            <PropertyRef Name="ArticleId" />
           </Key>
-          <Property Name="NewsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ArticleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="text" Nullable="false" />
           <Property Name="Content" Type="text" Nullable="false" />
-          <Property Name="imgURL" Type="varchar" MaxLength="100" />
+          <Property Name="CreateAt" Type="datetime" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -31,6 +31,7 @@
           <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="AccountId" Type="int" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -41,6 +42,14 @@
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="imgURL" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Money" Type="float" Nullable="false" />
+          <Property Name="CreatedAt" Type="date" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Cart">
@@ -49,11 +58,13 @@ warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined
             <PropertyRef Name="Price" />
             <PropertyRef Name="imgURL" />
             <PropertyRef Name="Quantity" />
+            <PropertyRef Name="ProductId" />
           </Key>
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="imgURL" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__Orders__ProductI__3E52440B">
           <End Role="Products" Type="Self.Products" Multiplicity="1">
@@ -69,21 +80,39 @@ warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orders_Account">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="P12TModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cart" EntityType="Self.Cart" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Cart].[Name] AS [Name], 
     [Cart].[Price] AS [Price], 
     [Cart].[imgURL] AS [imgURL], 
-    [Cart].[Quantity] AS [Quantity]
+    [Cart].[Quantity] AS [Quantity], 
+    [Cart].[ProductId] AS [ProductId]
     FROM [dbo].[Cart] AS [Cart]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__Orders__ProductI__3E52440B" Association="Self.FK__Orders__ProductI__3E52440B">
             <End Role="Products" EntitySet="Products" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Account" Association="Self.FK_Orders_Account">
+            <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
@@ -93,7 +122,6 @@ warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined
       <Schema Namespace="P12TModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="P12TEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="P12TModel.Account" />
-          <EntitySet Name="News" EntityType="P12TModel.News" />
           <EntitySet Name="Orders" EntityType="P12TModel.Order" />
           <EntitySet Name="Products" EntityType="P12TModel.Product" />
           <AssociationSet Name="FK__Orders__ProductI__3E52440B" Association="P12TModel.FK__Orders__ProductI__3E52440B">
@@ -101,6 +129,12 @@ warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
           <EntitySet Name="Carts" EntityType="P12TModel.Cart" />
+          <AssociationSet Name="FK_Orders_Account" Association="P12TModel.FK_Orders_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Reports" EntityType="P12TModel.Report" />
+          <EntitySet Name="Articles" EntityType="P12TModel.Article" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -111,15 +145,7 @@ warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="News">
-          <Key>
-            <PropertyRef Name="NewsId" />
-          </Key>
-          <Property Name="NewsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="imgURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="P12TModel.FK_Orders_Account" FromRole="Account" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -129,6 +155,8 @@ warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="P12TModel.FK__Orders__ProductI__3E52440B" FromRole="Order" ToRole="Product" />
+          <Property Name="AccountId" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="P12TModel.FK_Orders_Account" FromRole="Order" ToRole="Account" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -160,11 +188,42 @@ warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined
             <PropertyRef Name="Price" />
             <PropertyRef Name="imgURL" />
             <PropertyRef Name="Quantity" />
+            <PropertyRef Name="ProductId" />
           </Key>
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="imgURL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Orders_Account">
+          <End Type="P12TModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="P12TModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Money" Type="Double" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="ArticleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateAt" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -183,19 +242,10 @@ warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="News">
-            <EntityTypeMapping TypeName="P12TModel.News">
-              <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="imgURL" ColumnName="imgURL" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="NewsId" ColumnName="NewsId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="P12TModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
@@ -215,10 +265,30 @@ warning 6002: The table/view 'P12T.dbo.Cart' does not have a primary key defined
           <EntitySetMapping Name="Carts">
             <EntityTypeMapping TypeName="P12TModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="imgURL" ColumnName="imgURL" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="P12TModel.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="P12TModel.Article">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
